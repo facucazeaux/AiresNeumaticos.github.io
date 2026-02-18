@@ -1,0 +1,482 @@
+/* ================== RESET BÁSICO ================== */
+*,
+*::before,
+*::after{
+  box-sizing: border-box;
+}
+
+/* ================== VARIABLES ================== */
+:root{
+  --bg: #0e1111;
+  --panel: #151a1a;
+  --muted: #9aa4a7;
+  --text: #e9eff0;
+  --accent: #22c55e;    /* verde sobrio agrario */
+  --accent-ink: #0a0;
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(0,0,0,.25);
+  --container: 1120px;
+}
+
+/* ================== BASE ================== */
+html, body{
+  height: 100%;
+}
+
+body{
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(1200px 600px at 85% -10%, #163019 0%, transparent 60%),
+    var(--bg);
+  line-height: 1.55;
+}
+
+/* Utilidades generales */
+.container{
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+
+.section{
+  padding: 72px 0;
+}
+
+.section.alt{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+}
+
+.section-title{
+  font-size: clamp(1.4rem, 2.8vw, 2rem);
+  margin: 0 0 24px;
+  letter-spacing: .2px;
+}
+
+.small{ font-size: .9rem; color: var(--muted); }
+
+a{
+  color: var(--text);
+  text-decoration: none;
+}
+
+a:hover{
+  opacity: .9;
+}
+
+/* ================== HEADER + LOGO (MOBILE FIRST) ================== */
+.site-header{
+  --header-h: 56px;
+  --logo-size: 36px;
+
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: saturate(140%) blur(6px);
+}
+
+/* SOLO en el header el container es full-width */
+.site-header .container{
+  width: 100%;
+  max-width: 100%;
+}
+
+/* contenedor del header */
+.header-inner{
+  width: 100%;
+  max-width: 1120px;   /* igual que tu container */
+  margin-inline: auto; /* centra todo el contenido del header */
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+/* marca (logo + texto) */
+.brand{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.site-header .logo{
+  position: relative;
+  width: var(--logo-size);
+  height: var(--logo-size);
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow: 0 4px 12px rgba(0,0,0,.18);
+  overflow: hidden;
+}
+
+.site-header .logo img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* texto de la marca */
+.brand-mark{ display: none; }
+
+.brand-text{
+  font-size: 22px;
+  font-weight: 600;
+}
+
+/* NAV – mobile por defecto */
+.nav{
+  position: static;
+}
+
+.nav-list{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: var(--header-h);      /* cuelga desde abajo del header */
+  display: grid;
+  gap: 0;
+  background: rgba(12,16,16,.98);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .25s ease;
+}
+
+.nav-list.open{
+  max-height: 260px;
+}
+
+.nav-list li{
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+
+.nav-list a{
+  display: block;
+  padding: 14px 16px;
+  color: var(--text);
+  opacity: .9;
+}
+
+/* Botón hamburguesa */
+.nav-toggle{
+  display: inline-block;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.nav-toggle .bar{
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text);
+  margin: 5px 0;
+}
+
+/* ================== BOTONES ================== */
+.btn{
+  display: inline-block;
+  border: 1px solid transparent;
+  padding: .8rem 1.1rem;
+  border-radius: 999px;
+  font-weight: 600;
+  background: linear-gradient(140deg, var(--accent), #18a34a);
+  color: #0b1b10;
+  box-shadow: var(--shadow);
+}
+
+.btn:hover{
+  transform: translateY(-1px);
+}
+
+.btn-sm{
+  padding: .5rem .9rem;
+}
+
+/* ================== HERO (MOBILE FIRST) ================== */
+.hero{
+  padding: 48px 0 24px;   /* un poco menos de padding arriba en mobile */
+}
+
+.hero-copy{
+  padding-right: 8px;
+}
+
+.hero-inner{
+  display: grid;
+  grid-template-columns: 1fr; /* uno debajo del otro */
+  gap: 32px;
+}
+
+.hero h1{
+  margin: 0 0 12px;
+  font-size: clamp(1.4rem, 5vw, 2.2rem);  /* título más chico en mobile */
+}
+
+.hero p{
+  color: var(--muted);
+  margin: 0 0 16px;
+}
+
+.hero-cta{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  margin: 18px 0;
+}
+
+.hero .link{
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.hero-bullets{
+  display: grid;
+  gap: 8px;
+  padding: 0;
+  margin: 14px 0 0;
+  list-style: none;
+}
+
+.hero-bullets li{
+  position: relative;
+  padding-left: 22px;
+  color: #cfe7d6;
+}
+
+.hero-bullets li::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .45em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(140deg, var(--accent), #18a34a);
+  box-shadow: 0 0 0 2px rgba(34,197,94,.15);
+}
+
+/* imagen/placeholder del hero */
+.hero-media .hero-placeholder{
+  height: 260px;
+  border-radius: var(--radius);
+  background:
+    radial-gradient(300px 160px at 70% 20%, rgba(34,197,94,.25), transparent 55%),
+    linear-gradient(180deg, #1b2322, #0f1414);
+  display: grid;
+  place-items: center;
+  color: #7aa88a;
+  border: 1px solid rgba(255,255,255,.06);
+}
+
+/* ================== CARDS / GRID ================== */
+.grid-3{
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;   /* mobile: una columna */
+}
+
+.card{
+  background: var(--panel);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  transition: transform .15s ease, border-color .15s ease;
+}
+
+.card:hover{
+  transform: translateY(-2px);
+  border-color: rgba(34,197,94,.35);
+}
+
+.card h3{
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+}
+
+.card p{
+  margin: 0;
+  color: var(--muted);
+}
+
+.card-media .thumb{
+  height: 160px;
+  border-radius: calc(var(--radius) - 4px);
+  background:
+    linear-gradient(140deg, rgba(34,197,94,.25), transparent 40%),
+    linear-gradient(180deg, #17201d, #0f1414);
+  border: 1px solid rgba(255,255,255,.06);
+  margin-bottom: 12px;
+}
+
+/* ================== CONTACTO ================== */
+.contact{
+  display: grid;
+  gap: 28px;
+  align-items: start;
+  grid-template-columns: 1fr;   /* mobile: una sola columna */
+}
+
+.contact-list{
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+}
+
+.contact-list li{
+  margin: 6px 0;
+  color: #d6e3da;
+}
+
+.form{
+  background: var(--panel);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+
+.field{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+label{
+  font-weight: 600;
+  font-size: .92rem;
+}
+
+input,
+textarea{
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: #0f1414;
+  color: var(--text);
+  outline: none;
+}
+
+input:focus,
+textarea:focus{
+  border-color: rgba(34,197,94,.45);
+}
+
+.form-note{
+  color: var(--muted);
+  margin: .6rem 0 0;
+}
+
+/* ================== FOOTER ================== */
+.site-footer{
+  border-top: 1px solid rgba(255,255,255,.06);
+  background: #0d1110;
+  
+}
+
+.footer-inner{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;   /* antes era flex-start */
+  justify-content: center;
+  padding: 22px 0;
+  text-align: center;    /* centra el texto */
+}
+
+.footer-inner p{
+  margin: 0;
+}
+
+/* ================== BREAKPOINTS (MOBILE ▶ DESKTOP) ================== */
+
+/* Tablet ~ >= 720px */
+@media (min-width: 720px){
+
+  .site-header{
+    --header-h: 60px;
+    --logo-size: 48px;
+  }
+
+  .brand-text{
+    font-size: 24px;
+  }
+
+  /* NAV en línea, sin menú desplegable */
+  .nav-toggle{
+    display: none;
+  }
+
+  .nav-list{
+    position: static;
+    display: flex;
+    gap: 22px;
+    border-bottom: none;
+    background: transparent;    /* ⬅ pisa el fondo negro del mobile */
+    max-height: none;
+    overflow: visible;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-list li{
+    border-top: none;
+  }
+
+  .nav-list a{
+    padding: 0;
+  }
+
+  .hero-inner{
+    gap: 36px;
+  }
+
+  .grid-3{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .footer-inner{
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+/* Desktop ~ >= 980px */
+@media (min-width: 980px){
+
+  .site-header{
+    --header-h: 60px;
+    --logo-size: 60px;
+  }
+
+  .hero-inner{
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    align-items: center;
+  }
+
+  .hero-media .hero-placeholder{
+    height: 320px;
+  }
+
+  .grid-3{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .contact{
+    grid-template-columns: 1.1fr .9fr;
+  }
+}
